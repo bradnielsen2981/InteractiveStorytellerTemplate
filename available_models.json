@@ -1,0 +1,15 @@
+[
+  {
+    "category": "Free Models",
+    "models": [
+      { "id": "cohere/north-mini-code:free", "name": "Cohere North Mini Code (Free)" },
+      { "id": "openrouter/free", "name": "Free Models Router (Free)" },
+      { "id": "nvidia/nemotron-3-ultra-550b-a55b:free", "name": "NVIDIA Nemotron 3 Ultra (Free)" },
+      { "id": "nvidia/nemotron-3.5-lightning:free", "name": "NVIDIA Nemotron 3.5 Lightning (Free)" },
+      { "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free", "name": "NVIDIA Nemotron 3 Nano Omni (Free)" },
+      { "id": "inclusionai/ling-3.1-flash", "name": "inclusionAI Ling 3.1 Flash (Free)" },
+      { "id": "dots-studio/dots-3-note-preview:free", "name": "Dots Studio Dots3-Note Preview (Free)" },
+      { "id": "liquid/lfm-2.5-2.6b:free", "name": "LiquidAI LFM2.5-2.6B (Free)" }
+    ]
+  }
+]
