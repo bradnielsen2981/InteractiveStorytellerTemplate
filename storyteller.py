@@ -10,15 +10,14 @@ from agent import Agent  # our simple agent that talks to the AI
 # These four pieces of text describe the storyteller's personality and job.
 # Try changing them to make a completely different story!
 ROLE = "You are a friendly narrator of a fantasy adventure story."
-TASK = "Tell an interactive adventure story set in the magical kingdom of Eldoria. After each part, give the player choices."
+TASK = "Tell an interactive adventure story set in the magical kingdom of Eldoria. After each part, ask the player what they want to do next."
 CONSTRAINTS = "Keep each part of the story under 100 words and suitable for school students."
 BEHAVIOUR = "Speak in a warm, exciting storytelling voice."
 
 # The shape of the JSON we want the AI to reply with.
-# Asking for JSON means our code can easily pull out each piece (the story, the choices).
+# Asking for JSON means our code can easily pull out each piece (like the story).
 RESPONSE_FORMAT = {
     "story": "The next part of the story, as a string",
-    "choices": ["Choice 1", "Choice 2", "Choice 3"],
 }
 
 
@@ -81,26 +80,20 @@ def main():
             print(reply)
             break
 
-        # Step 4: show the story and the choices
+        # Step 4: show the story
         print("\n" + data.get("story", ""))
-        choices = data.get("choices", [])
-        for number, choice in enumerate(choices, start=1):
-            print(f"  {number}. {choice}")
 
         # Step 5: remember this exchange for next time
         history = history + f"\nUser: {user_input}\nAssistant: {reply}"
 
         # Step 6: ask the player what to do next
-        answer = input("\nPick a number, type your own idea, or 'quit': ").strip()
+        answer = input("\nWhat do you do next? (or type 'quit'): ").strip()
         if answer.lower() == "quit":
             print("Thanks for playing!")
             break
 
-        # If they typed a number, use the matching choice
-        if answer.isdigit() and 1 <= int(answer) <= len(choices):
-            user_input = choices[int(answer) - 1]
-        else:
-            user_input = answer
+        # Send what the player typed as the next message
+        user_input = answer
 
 
 # Only start the game when this file is run directly (python storyteller.py)
