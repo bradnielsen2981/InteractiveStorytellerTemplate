@@ -1,0 +1,6 @@
+# Secret API keys: never upload these to GitHub
+api_key.py
+.env
+
+# Files Python makes automatically when it runs
+__pycache__/

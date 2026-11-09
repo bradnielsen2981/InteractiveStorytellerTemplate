@@ -1,12 +1,10 @@
 # This file is the interactive story game. It decides WHAT to say to the AI
 # (by building the prompt) and uses an Agent from agent.py to actually send it.
 
-import os      # lets us read settings from the computer, like the API key
 import sys     # lets us fix how text is printed on Windows
 import json    # lets us turn the AI's JSON reply into a Python dictionary
 
-from dotenv import load_dotenv  # reads the API key from the .env file
-from agent import Agent         # our simple agent that talks to the AI
+from agent import Agent  # our simple agent that talks to the AI
 
 
 # These four pieces of text describe the storyteller's personality and job.
@@ -56,15 +54,11 @@ def read_json_reply(reply):
 
 
 def main():
-    # Load the API key from the .env file
-    load_dotenv()
-    api_key = os.getenv("OPENROUTER_API_KEY")
-
     # Let Windows print any character the AI uses (like emojis or fancy dashes)
     sys.stdout.reconfigure(encoding="utf-8")
 
-    # Create the agent and give it the API key
-    narrator = Agent(api_key=api_key)
+    # Create the agent (it uses the API key saved in agent.py)
+    narrator = Agent()
 
     # The conversation so far. The AI has no memory of its own,
     # so we send the whole history inside every new prompt.

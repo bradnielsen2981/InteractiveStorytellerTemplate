@@ -1,5 +1,8 @@
-import os                  # lets us read settings from the computer, like the API key
 from openai import OpenAI  # the library that sends our messages to the AI model
+
+# The key that lets us use OpenRouter. It lives in api_key.py, which is kept off GitHub.
+# If that file is missing, create api_key.py next to this file containing:
+from api_key import API_KEY
 
 
 class Agent:
@@ -7,11 +10,7 @@ class Agent:
 
     # __init__ runs automatically every time we create a new agent with Agent().
     # "self" means "this particular agent".
-    def __init__(self, api_key=None, model="cohere/north-mini-code:free"):
-        # If no API key was given, look for one saved on the computer
-        if api_key is None:
-            api_key = os.getenv("OPENROUTER_API_KEY")
-
+    def __init__(self, api_key=API_KEY, model="cohere/north-mini-code:free"):
         # The client is the object that actually connects to the AI over the internet.
         # We use OpenRouter, which gives us access to lots of different AI models.
         self.client = OpenAI(
@@ -81,10 +80,6 @@ class Agent:
 
 def setup():
     """Get the computer ready to talk to the AI."""
-    # Load the API key from the .env file so os.getenv() can find it
-    from dotenv import load_dotenv
-    load_dotenv()
-
     # Let Windows print any character the AI uses (like emojis or fancy dashes)
     import sys
     sys.stdout.reconfigure(encoding="utf-8")
@@ -102,13 +97,14 @@ def test_model(model=None):
     reply = agent.get_response()
 
     print("Reply:", reply)
+    print("-" * 40)
 
     # Show the full response the AI sent back, formatted as JSON
     print("Full response:")
     print(agent.last_response.model_dump_json(indent=2))
     print("Prompt tokens:", agent.prompt_tokens)
     print("Reply tokens:", agent.reply_tokens)
-
+    print("-" * 40)
 
 # This part only runs when you run this file directly (python agent.py),
 # not when another file imports it.
